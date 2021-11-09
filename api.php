@@ -4,7 +4,7 @@ include "./includes/connect.php";
 $data_list = (array)($data_collection->findOne($app_query)->data);
 
 if (isset($_GET['key'])) {
-    if ($_POST['key'] == $apiKey) {
+    if ($_GET['key'] == $apiKey) {
         switch ($_GET['action']) {
             case "create":
 
