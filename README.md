@@ -2,13 +2,15 @@
 
 ## Build Docker File
 
-```cd includes
+```
+cd includes
 docker build -t php-mongo-legacy-app .
 ```
 
 ## Run Docker Container
 
-```docker run -d \
+```
+docker run -d \
   --name=legacy_app-<app name> \
   -e APP=<app name> \
   -e CREDS="<username:password>" \
