@@ -27,6 +27,8 @@ $shortNamePlural = $config["app_settings"]["shortNamePlural"];
 $lineItemRecordName = $config["app_settings"]["lineItemRecordName"];
 $lineItemRecordNamePlural = $config["app_settings"]["lineItemRecordNamePlural"];
 
+$apiKey = $config["app_settings"]["apiKey"];
+
 $fields = $config["fields"];
 
 $displayName = $config["friendlyFieldNameOverrides"];
