@@ -18,6 +18,8 @@ $app_query = ['app_id' => $app_id];
 $config = $config_collection->findOne($app_query)->config;
 
 $appname = $config["app_settings"]["appname"];
+$bannerColor = (isset($config["app_settings"]["bannerColor"]) ? $config["app_settings"]["bannerColor"]: "#999999");
+$bannerTextColor = (isset($config["app_settings"]["bannerTextColor"]) ? $config["app_settings"]["bannerColor"]: "#FFFFFF");
 $domain = $config["app_settings"]["domain"];
 $copyright = $config["app_settings"]["copyright"];
 $recordName = $config["app_settings"]["recordName"];

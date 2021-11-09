@@ -34,7 +34,7 @@ if ($total <= $end) {
 </table>
 <br />
 <table style="width:90%; border: 1px solid #666666; margin-left:auto; margin-right:auto;">
-    <tr style="background-color: #999999; color: #FFFFFF;">
+    <tr style="background-color: <?=$bannerColor?>; color: <?=$bannerTextColor?>;">
         <?php
             foreach ($summaryFields as $field){
                 if (isset($displayName[$field]))

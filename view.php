@@ -4,7 +4,7 @@ include "./includes/header.php";
 ?>
 <table style="width: 950px; border: 1px solid #000000; margin-left:auto; margin-right:auto; padding: 0px;">
     <tr style="padding: 0px;">
-        <td colspan="2" style="background-color: #999999; color: #FFFFFF; padding: 20px;">
+        <td colspan="2" style="background-color: <?=$bannerColor?>; color: <?=$bannerTextColor?>; padding: 20px;">
             <h1><?= $appname; ?></h1>
         </td>
     </tr>
