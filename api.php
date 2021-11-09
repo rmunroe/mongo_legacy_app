@@ -20,6 +20,7 @@ if (isset($_GET['key'])) {
                         if (in_array($field, $fields) && $field !== "id")
                             $newArray[$field] = $value;
                     }
+                    var_dump($newArray);
                     if (count($newArray) > 0) {
                         $newArray["id"] = $newArray;
                         $data_list[] = $newArray;
