@@ -55,7 +55,7 @@ if (isset($_GET['key'])) {
                                     ['$set' => ['data' => $data_list]]
                                 );
 
-                                echo json_encode($newArray, JSON_PRETTY_PRINT);
+                                echo json_encode($body, JSON_PRETTY_PRINT);
 
                                 break;
                             }
