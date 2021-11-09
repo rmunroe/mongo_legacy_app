@@ -10,6 +10,18 @@ $newId = (($data_list[(count($data_list) - 1)]->id) + 1);
 
 $newArray = [];
 
+$fieldlist = [];
+
+foreach ($fields["visible"] as $section => $items) {
+    if ($section == "Line Items") {
+        $fieldlist[]="lineitems";
+    } else {
+        foreach ($items as $field) {
+            $fieldlist[]=$field;
+        }
+    }
+}
+
 if (isset($_GET['key'])) {
     if ($_GET['key'] == $apiKey) {
         switch ($_GET['action']) {
@@ -17,7 +29,7 @@ if (isset($_GET['key'])) {
                 if (count((array)$body) > 0) {
                     foreach ($body as $field => $value) {
                         echo $field."<br>";
-                        if (in_array($field, $fields["visible"]))
+                        if (in_array($field, )
                             $newArray[$field] = $value;
                     }
                     var_dump($newArray);
