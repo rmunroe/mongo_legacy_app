@@ -6,17 +6,16 @@ $creds = getenv('CREDS');
 $url = getenv('URL');
 $app_id= getenv('APP');
 
-$client = new MongoDB\Client(
-    'mongodb+srv://'.$creds.'@'.$url);
+$database = new MongoDB\Client('mongodb+srv://'.$creds.'@'.$url)->legacy_apps;
 
 
-$config_collection = $client->legacy_apps->app_config;
-$config_collection = $client->legacy_apps->data;
-$config_collection = $client->legacy_apps->default_data;
+$config_collection = $database->app_config;
+$data_collection = $database->data;
+$default_collection = $database->default_data;
 
 $app_query = ['app_id' => $app_id];
 
-$config = $config_collection;
+$config = $config_collection->findOne($app_query);
 
 var_dump($config);
 
