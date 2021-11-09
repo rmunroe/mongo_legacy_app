@@ -1,10 +1,9 @@
 <?php
-include "./includes/fields.php";
+include "./includes/connect.php";
 
 $dataNo = (isset($_GET['i']) ? $_GET['i'] : null);
 
-$file = file_get_contents('./data/data.json');
-$data_list = json_decode($file, FALSE);
+$data_list = (array)($data_collection->findOne($app_query)->data);
 
 $newId = (($data_list[(count($data_list) - 1)]->id) + 1);
 
