@@ -31,7 +31,7 @@ $fields = $config["fields"];
 
 $displayName = $config["friendlyFieldNameOverrides"];
 
-$summaryFields = $config["summaryFields"];
+$summaryFields = (array)$config["summaryFields"];
 
 
 $webhook_enabled = strlen($config["app_settings"]["webhook"]["key"]) > 1 ? true : false;
