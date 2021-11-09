@@ -47,7 +47,6 @@ if (isset($_GET['key'])) {
                     if (isset($body["id"])) {
 
                         foreach ($data_list as $key => $data) {
-                            echo $data->id ."==". $body["id"]."<br>";
                             if ($data->id == $body["id"]) {
                                 $data_list[$key] = $body;
 
