@@ -14,10 +14,10 @@ $fieldlist = [];
 
 foreach ($fields["visible"] as $section => $items) {
     if ($section == "Line Items") {
-        $fieldlist[]="lineitems";
+        $fieldlist[] = "lineitems";
     } else {
         foreach ($items as $field) {
-            $fieldlist[]=$field;
+            $fieldlist[] = $field;
         }
     }
 }
@@ -43,7 +43,26 @@ if (isset($_GET['key'])) {
                 }
                 break;
             case "update":
+                if (count((array)$body) > 0) {
+                    if (isset($body["id"])) {
+                        $index = null;
 
+                        foreach ($data_list as $key => $data) {
+                            if ($data->id == $body["id"]) {
+                                $data_list[$key] = $body;
+
+                                $updateDocument = $data_collection->updateOne(
+                                    $app_query,
+                                    ['$set' => ['data' => $data_list]]
+                                );
+
+                                echo json_encode($newArray, JSON_PRETTY_PRINT);
+
+                                break;
+                            }
+                        }
+                    }
+                }
                 break;
             case "read": //api.php?key=1234&action=read&id=4021
                 if (isset($_GET['id'])) {
