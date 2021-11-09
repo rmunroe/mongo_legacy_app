@@ -15,7 +15,7 @@ $default_collection = $database->default_data;
 
 $app_query = ['app_id' => $app_id];
 
-$config = $config_collection->findOne($app_query);
+$config = $config_collection->findOne($app_query)->config;
 
 $appname = $config["app_settings"]["appname"];
 $domain = $config["app_settings"]["domain"];
