@@ -74,9 +74,10 @@ if (isset($_POST["submit"])) {
 
     echo "<div id=\"success\" style=\"background-color:green;color:white;text-align:center;width:100%;\">SUCCESS</div>";
 
-    $dataFile = fopen("./data/data.json", "w") or die("Unable to open file!");
-    fwrite($dataFile, json_encode($data_list, JSON_PRETTY_PRINT));
-    fclose($dataFile);
+    $document = $data_collection->findOne($app_query);
+    $updateDocument = $document->updateOne(
+        ['data' => $data_list]
+    );
 
     $newId++;
 
