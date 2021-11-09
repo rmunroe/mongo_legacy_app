@@ -74,9 +74,9 @@ if (isset($_POST["submit"])) {
 
     echo "<div id=\"success\" style=\"background-color:green;color:white;text-align:center;width:100%;\">SUCCESS</div>";
 
-    $document = $data_collection->findOne($app_query);
+    //$document = $data_collection->findOne($app_query);
 
-    $updateDocument = $document->updateOne(
+    $updateDocument = $data_collection->updateOne(
         $app_query,
         ['$set' => ['data' => $data_list]]
     );
