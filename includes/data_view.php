@@ -2,8 +2,8 @@
 $newId = $_GET['i'];
 
 
-$file = file_get_contents('./data/data.json');
-$data_list = json_decode($file, FALSE);
+$data_list = (array)($data_collection->findOne($app_query)->data);
+
 
 
 //var_dump($data_list);
