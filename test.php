@@ -17,7 +17,7 @@ $app_query = ['app_id' => $app_id];
 
 $config = $config_collection->findOne($app_query);
 
-var_dump($config);
+var_dump($config->config);
 
 
 
