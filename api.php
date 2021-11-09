@@ -25,7 +25,7 @@ foreach ($fields["visible"] as $section => $items) {
 if (isset($_GET['key'])) {
     if ($_GET['key'] == $apiKey) {
         switch ($_GET['action']) {
-            case "create":
+            case "create": // api.php?key=1234&action=create
                 if (count((array)$body) > 0) {
                     $newArray["id"] = $newId;
                     foreach ($body as $field => $value) {
@@ -42,7 +42,7 @@ if (isset($_GET['key'])) {
                     }
                 }
                 break;
-            case "update":
+            case "update": // api.php?key=1234&action=update
                 if (count((array)$body) > 0) {
                     if (isset($body["id"])) {
 
@@ -63,7 +63,7 @@ if (isset($_GET['key'])) {
                     }
                 }
                 break;
-            case "read": //api.php?key=1234&action=read&id=4021
+            case "read": // api.php?key=1234&action=read&id=4021
                 if (isset($_GET['id'])) {
                     foreach (array_reverse($data_list) as $key => $data)
                         if ($data->id == $_GET['id'])
