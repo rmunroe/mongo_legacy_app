@@ -2,14 +2,18 @@
 
 ## Build Docker File
 
-```
-cd includes
+Grab the [dockerfile](includes/dockerfile) and load it onto your docker host.
+
+```sh
+mkdir php-mongo-legacy-app
+cd php-mongo-legacy-app
+wget https://raw.githubusercontent.com/jscanzoni/mongo_legacy_app/master/includes/dockerfile
 docker build -t php-mongo-legacy-app .
 ```
 
 ## Run Docker Container
 
-```
+```sh
 docker run -d \
   --name=legacy_app-<app name> \
   -e APP=<app name> \
