@@ -27,14 +27,12 @@ if (isset($_GET['key'])) {
         switch ($_GET['action']) {
             case "create":
                 if (count((array)$body) > 0) {
+                    $newArray["id"] = $newId;
                     foreach ($body as $field => $value) {
-                        echo $field."<br>";
                         if (in_array($field, $fieldlist))
                             $newArray[$field] = $value;
                     }
-                    var_dump($newArray);
-                    if (count($newArray) > 0) {
-                        $newArray["id"] = $newArray;
+                    if (count($newArray) > 1) {
                         $data_list[] = $newArray;
                         $updateDocument = $data_collection->updateOne(
                             $app_query,
