@@ -2,7 +2,7 @@ RewriteEngine On
 
 # generic: ?var=value
 # you can retrieve /something by looking at $_GET['something']
-RewriteRule ^(.+)$ /?var=$1
+#RewriteRule ^(.+)$ /?var=$1
 
 # but depending on your current links, you might
 # need to map everything out. Examples:
@@ -13,9 +13,9 @@ RewriteRule ^view/([0-9]+)$ /view.php?i=$1
 
 # /articles/123/asc
 # to: ?p=articles&show=123&sort=asc
-RewriteRule ^articles/([0-9]+)/(asc|desc)$ /?p=articles&show=$1&sort=$2
+#RewriteRule ^articles/([0-9]+)/(asc|desc)$ /?p=articles&show=$1&sort=$2
 
 # you can add /? at the end to make a trailing slash work as well:
 # /something or /something/
 # to: ?var=something
-RewriteRule ^(.+)/?$ /?var=$1
+#RewriteRule ^(.+)/?$ /?var=$1
