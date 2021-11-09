@@ -20,7 +20,7 @@ $app_query = array('app_id' => $app_id);
 
 $config = $config_collection->find($app_query);
 
-var_dump($config->data);
+var_dump($config->config);
 
 
 
