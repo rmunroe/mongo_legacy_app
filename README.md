@@ -22,4 +22,4 @@ php-mongo-legacy-app:latest
 
 ## Create a New Application
 
-New apps are created using an internal Appian application for the Solutions Consulting team.
+New apps are created using an internal application for the Solutions Consulting team.
