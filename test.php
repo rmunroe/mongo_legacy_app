@@ -3,12 +3,14 @@
 require 'vendor/autoload.php';
 
 $creds = getenv('CREDS');
+$url = getenv('URL');
+$app_id= getenv('APP');
 
 $client = new MongoDB\Client(
-    'mongodb+srv://'.$creds.'@cluster0.dg109.mongodb.net/legacy_apps?retryWrites=true&w=majority');
+    'mongodb+srv://'.$creds.'@'.$url);
 
 $db = $client->test;
 
-echo $db;
+echo $app_id;
 
 ?>
