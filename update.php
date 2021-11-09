@@ -1,14 +1,15 @@
 
 <?php
 
-include "./includes/fields.php";
+include "./includes/connect.php";
 
 if (!$webhook_enabled)
     die("no webhook is enabled");
 
 if (isset($_POST["action"])) {
-    $file = file_get_contents('./data/data.json');
-    $data_list = json_decode($file, FALSE);
+
+    $data_list = (array)($data_collection->findOne($app_query)->data);
+
 
     echo "Please hold...<br><br>$webhook_processPageDescription...";
 
@@ -42,14 +43,10 @@ if (isset($_POST["action"])) {
             $data_list[$key]->$field = $value;
         }
 
-
-        //var_dump($data_list);
-
-/*************** UPDATE TO MONGO
-        $dataFile = fopen("./data/data.json", "w") or die("Unable to open file!");
-        fwrite($dataFile, json_encode($data_list, JSON_PRETTY_PRINT));
-        fclose($dataFile);
- */
+        $updateDocument = $data_collection->updateOne(
+            $app_query,
+            ['$set' => ['data' => $data_list]]
+        );
 
 
         echo "<script>
