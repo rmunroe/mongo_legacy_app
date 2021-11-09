@@ -1,6 +1,6 @@
 <?php
 
-$data_list = array_reverse($data_collection->findOne($app_query)->data);
+$data_list = array_reverse((array)($data_collection->findOne($app_query)->data));
 unset($_POST);
 if (!isset($_GET["s"]))
     $start = 1;
