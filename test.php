@@ -6,7 +6,7 @@ $creds = getenv('CREDS');
 $url = getenv('URL');
 $app_id= getenv('APP');
 
-$database = new MongoDB\Client('mongodb+srv://'.$creds.'@'.$url)->legacy_apps;
+$database = (new MongoDB\Client('mongodb+srv://'.$creds.'@'.$url))->legacy_apps;
 
 
 $config_collection = $database->app_config;
