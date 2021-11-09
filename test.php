@@ -1,5 +1,7 @@
 <?php
 
+require 'vendor/autoload.php';
+
 $creds = getenv('CREDS');
 
 $client = new MongoDB\Client(
