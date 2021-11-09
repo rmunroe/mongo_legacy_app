@@ -29,7 +29,7 @@ if (isset($_GET['key'])) {
                 if (count((array)$body) > 0) {
                     foreach ($body as $field => $value) {
                         echo $field."<br>";
-                        if (in_array($field, $fieldlist)
+                        if (in_array($field, $fieldlist))
                             $newArray[$field] = $value;
                     }
                     var_dump($newArray);
