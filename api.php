@@ -14,6 +14,7 @@ if (isset($_GET['key'])) {
     if ($_GET['key'] == $apiKey) {
         switch ($_GET['action']) {
             case "create":
+                echo $body;
                 if (count((array)$body) > 0) {
                     foreach ($body as $field => $value) {
                         if (in_array($field, $fields) && $field !== "id")
