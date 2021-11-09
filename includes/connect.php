@@ -29,7 +29,7 @@ $lineItemRecordNamePlural = $config["app_settings"]["lineItemRecordNamePlural"];
 
 $apiKey = $config["app_settings"]["apiKey"];
 
-$fields = $config["fields"];
+$fields = (array)$config["fields"];
 
 $displayName = $config["friendlyFieldNameOverrides"];
 
