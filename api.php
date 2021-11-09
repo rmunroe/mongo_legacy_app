@@ -45,9 +45,9 @@ if (isset($_GET['key'])) {
             case "update":
                 if (count((array)$body) > 0) {
                     if (isset($body["id"])) {
-                        $index = null;
 
                         foreach ($data_list as $key => $data) {
+                            echo $data->id ."==". $body["id"]."<br>";
                             if ($data->id == $body["id"]) {
                                 $data_list[$key] = $body;
 
