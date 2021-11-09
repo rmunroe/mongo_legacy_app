@@ -10,7 +10,6 @@ if (isset($_POST["action"])) {
 
     $data_list = (array)($data_collection->findOne($app_query)->data);
 
-
     echo "Please hold...<br><br>$webhook_processPageDescription...";
 
     $index = null;
