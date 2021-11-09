@@ -38,7 +38,7 @@ if (isset($_GET['key'])) {
                             $app_query,
                             ['$set' => ['data' => $data_list]]
                         );
-                        echo json_encode($data_list, JSON_PRETTY_PRINT);
+                        echo json_encode($newArray, JSON_PRETTY_PRINT);
                     }
                 }
                 break;
