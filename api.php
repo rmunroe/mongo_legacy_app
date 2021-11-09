@@ -13,9 +13,9 @@ if (isset($_GET['key'])) {
 
                 break;
             case "read":
-                if (isset($_POST['id'])) {
+                if (isset($_GET['id'])) {
                     foreach (array_reverse($data_list) as $key => $data)
-                        if ($data->id == $_POST['id']) 
+                        if ($data->id == $_GET['id']) 
                             echo json_encode($data, JSON_PRETTY_PRINT);
                 } else {
                     echo json_encode($data_list, JSON_PRETTY_PRINT);
