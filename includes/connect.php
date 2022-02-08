@@ -1,13 +1,23 @@
 <?php
 
+session_start();
+
 require 'vendor/autoload.php';
 
-$creds = getenv('CREDS');
-$url = getenv('URL');
-$app_id= getenv('APP');
+//app id set?
+if(isset($_GET['app_id'])){
+    $_SESSION['app_id']= $_GET['app_id'];
+}else{
+    if(!isset($_SESSION['app_id']))
+        die("No app id was set");
+}
+$app_id= $_SESSION['app_id'];
 
-$database = (new MongoDB\Client('mongodb+srv://'.$creds.'@'.$url))->legacy_apps;
+//establish mongo connection
 
+$connectionString = getenv('CONNECTION_STRING');
+
+$database = (new MongoDB\Client($connectionString))->legacy_apps;
 
 $config_collection = $database->app_config;
 $data_collection = $database->data;
@@ -15,8 +25,13 @@ $default_collection = $database->default_data;
 
 $app_query = ['app_id' => $app_id];
 
-$config = $config_collection->findOne($app_query)->config;
+//app id exists?
+$error = error_reporting();
+error_reporting(E_ERROR | E_PARSE);
+$config = $config_collection->findOne($app_query)->config or die("$app_id does not exist");;
+error_reporting($error);
 
+//app_settings
 $appname = $config["app_settings"]["appname"];
 $bannerColor = (isset($config["app_settings"]["bannerColor"]) ? $config["app_settings"]["bannerColor"]: "#999999");
 $bannerTextColor = (isset($config["app_settings"]["bannerTextColor"]) ? $config["app_settings"]["bannerTextColor"]: "#FFFFFF");
@@ -28,19 +43,41 @@ $shortNameLower = strtolower($shortName);
 $shortNamePlural = $config["app_settings"]["shortNamePlural"];
 $lineItemRecordName = $config["app_settings"]["lineItemRecordName"];
 $lineItemRecordNamePlural = $config["app_settings"]["lineItemRecordNamePlural"];
-
 $apiKey = $config["app_settings"]["apiKey"];
 
-$fields = (array)$config["fields"];
+//fields object
+$fields = $config["fields"];
 
-$displayName = $config["friendlyFieldNameOverrides"];
+$groups = [];
 
+foreach($fields as $field){
+    if (isset($field->group)){
+        if (!in_array($field->group,$groups)){
+            $groups[]=$field->group;
+        }
+    }
+}
+
+//summary fields array
 $summaryFields = (array)$config["summaryFields"];
 
-
+//webhook actions
 $webhook_enabled = strlen($config["app_settings"]["webhook"]["key"]) > 1 ? true : false;
 $webhook_url = $config["app_settings"]["webhook"]["url"];
 $webhook_key = $config["app_settings"]["webhook"]["key"];
 $webhook_tetherField = $config["app_settings"]["webhook"]["enabledWhenBlankTetherField"];
 $webhook_actionDescription = $config["app_settings"]["webhook"]["actionDescription"];
 $webhook_processPageDescription = $config["app_settings"]["webhook"]["processPageDescription"];
+
+
+function displayName($field) {
+    global $fields;
+
+    foreach($fields as $f){
+        if ($field==$f->field){
+            
+            return $f->friendlyName;
+            break;
+        }
+    }
+}

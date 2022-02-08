@@ -4,9 +4,18 @@ $dataNo = (isset($_GET['i']) ? $_GET['i'] : null);
 
 $data_list = (array)($data_collection->findOne($app_query)->data);
 
-$newId = (($data_list[(count($data_list) - 1)]->id) + 1);
+$newId = (isset($_GET['i']) ? $_GET['i'] : $_POST['id']);
 
 $data = [];
+$key = count($data_list);
+
+foreach ($data_list as $k => $d) {
+    if ($d->id == $newId) {
+        $data=$d;
+        $key=$k;
+    }
+}
+//var_dump($data);
 
 $numLines = isset($_POST["numLines"]) ? intval($_POST["numLines"]) : 0;
 
@@ -15,23 +24,24 @@ if (isset($_POST['new-lineitem'])) {
     $numLines++;
 }
 
-$data["lineitems"] = [];
 
 //populate $data array
 foreach ($fields as $field) {
     if (isset($field->group) and $field->group == "Line Items") {
 
         for ($i = 0; $i < $numLines; $i++) {
-            $data["lineitems"][$i][$field->field] = isset($_POST["lineitem-" . $field->field . $i]) ? $_POST["lineitem-" . $field->field . $i] : "";
+            if(!isset($data["lineitems"][$i]))
+                $data["lineitems"][$i]=[];
+            if(!isset($data["lineitems"][$i][$field->field]))
+                $data["lineitems"][$i][$field->field]="";
+
+            $data["lineitems"][$i][$field->field] = isset($_POST["lineitem-" . $field->field . $i]) ? $_POST["lineitem-" . $field->field . $i] : $data["lineitems"][$i][$field->field];
         }
     } else {
 
-        $data[$field->field] = isset($_POST[$field->field]) ? $_POST[$field->field] : "";
+        $data[$field->field] = isset($_POST[$field->field]) ? $_POST[$field->field] : $data[$field->field];
     }
 }
-
-$data["id"] = $newId;
-
 
 //save new record
 if (isset($_POST["submit"])) {
@@ -54,40 +64,24 @@ if (isset($_POST["submit"])) {
         }
     }
 
-    $data_list[] = $data;
+    $data_list[$key] = $data;
 
-    echo "<div id=\"success\" style=\"background-color:green;color:white;text-align:center;width:100%;\">SUCCESS</div>";
+  //  echo "<div id=\"success\" style=\"background-color:green;color:white;text-align:center;width:100%;\">SUCCESS</div>";
 
     $updateDocument = $data_collection->updateOne(
         $app_query,
         ['$set' => ['data' => $data_list]]
     );
 
-    $newId++;
-
-    //clear the form
+    //redirect to read-only
     unset($_POST);
-
-    $data=[];
-    $data["lineitems"] = [];
-    $numLines = 0;
-
-    foreach ($fields as $field) {
-        if (isset($field->group) and $field->group == "Line Items") {
-
-            for ($i = 0; $i < $numLines; $i++) {
-                $data["lineitems"][$i][$field->field] = isset($_POST["lineitem-" . $field->field . $i]) ? $_POST["lineitem-" . $field->field . $i] : "";
-            }
-        } else {
-
-            $data[$field->field] = isset($_POST[$field->field]) ? $_POST[$field->field] : "";
-        }
-    }
-
-    $data["id"] = $newId;
+    echo "<script>
+        setTimeout(function() {
+        window.location.href = \"./view.php?i=$newId\";}, 0);
+        </script>";
 }
 
-echo "<h2 style=\"text-align: center;\">New $recordName #" . ($newId) . "</h2>";
+echo "<h2 style=\"text-align: center;\">Edit $recordName #" . ($newId) . "</h2>";
 echo "<form action=\"" . $_SERVER['PHP_SELF'] . "\" method=\"POST\">";
 foreach ($fields as $field) {
     if ($field->hidden)

@@ -37,10 +37,9 @@ if ($total <= $end) {
     <tr style="background-color: <?=$bannerColor?>; color: <?=$bannerTextColor?>;">
         <?php
             foreach ($summaryFields as $field){
-                if (isset($displayName[$field]))
-                    echo "<th>$displayName[$field]</th>";
-                else
-                    echo "<th>".ucwords($field)."</th>";
+                
+                    echo "<th>".displayName($field)."</th>";
+                
             }
         ?>
     </tr>

@@ -11,10 +11,8 @@ docker build -t php-mongo-legacy-app .
 
 ```
 docker run -d \
-  --name=legacy_app-<app name> \
-  -e APP=<app name> \
-  -e CREDS="<username:password>" \
-  -e URL="<mongodb url>" \
+  --name=legacy_apps \
+  -e CONNECTION_STRING=<mongodb connection string> \
   -p 80:80 \
   --restart always \
 php-mongo-legacy-app:latest 
