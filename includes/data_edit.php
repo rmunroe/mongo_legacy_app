@@ -84,7 +84,7 @@ if (isset($_POST["submit"])) {
 echo "<h2 style=\"text-align: center;\">Edit $recordName #" . ($newId) . "</h2>";
 echo "<form action=\"" . $_SERVER['PHP_SELF'] . "\" method=\"POST\">";
 foreach ($fields as $field) {
-    if ($field->hidden)
+    if ($field->type == "hidden")
         echo "<input type=\"hidden\" id=\"$field->field\" name=\"$field->field\" value=\"" . $data[$field->field] . "\">";
 }
 foreach ($groups as $group) {
@@ -119,7 +119,7 @@ foreach ($groups as $group) {
         echo "<h3>$group</h3>";
         echo "<table>";
         foreach ($fields as $field) {
-            if (isset($field->group) and $field->group == $group) {
+            if (isset($field->group) and $field->group == $group and $field->type != "hidden") {
                 echo "<tr><td style=\"padding:4px\"><strong><label for=\"" . $field->field . "\">";
                 echo $field->friendlyName;
                 echo "</label></strong></td>";

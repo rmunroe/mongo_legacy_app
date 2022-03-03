@@ -11,7 +11,10 @@ echo "<h2 style=\"text-align: center;\">$recordName #" . ($newId) . "</h2>";
 foreach (array_reverse($data_list) as $key => $data) {
     if ($data->id == $newId) {
         //var_dump($data);
-
+        foreach ($fields as $field) {
+            if ($field->type == "hidden")
+                echo "<input type=\"hidden\" id=\"$field->field\" name=\"$field->field\" value=\"" . $data[$field->field] . "\">";
+        }
         foreach ($groups as $group) {
                 if ($group == "Line Items") {
                     echo "<h3>" . $lineItemRecordNamePlural . " (" . count($data->lineitems) . ")</h3>";
@@ -42,7 +45,7 @@ foreach (array_reverse($data_list) as $key => $data) {
                     echo "<h3>$group</h3>";
                     echo "<table>";
                     foreach ($fields as $field) {
-                        if(isset($field->group) and $field->group==$group){
+                        if(isset($field->group) and $field->group==$group and $field->type != "hidden"){
                         echo "<tr><td style=\"padding:4px\"><strong><label for=\"".$field->field."\">";
                         echo $field->friendlyName;
                         echo "</label></strong></td>";
