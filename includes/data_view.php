@@ -57,18 +57,19 @@ foreach (array_reverse($data_list) as $key => $data) {
             }
             
         echo "<div style=\"text-align:center;\">";
-        echo"<form action=\"./edit.php?i=$newId\" method=\"POST\">
+        echo "<table width=\"100%\"><tr><td width=\"30%\"></td>";
+        echo"<td><form action=\"./edit.php?i=$newId\" method=\"POST\">
         <input type=\"hidden\" id=\"id\" name=\"id\" value=\"$newId\">
         <input id=\"edit\" name=\"edit\" type=\"submit\" value=\"Edit\" />
-        </form>";
+        </form></td>";
 
         if ($webhook_enabled & ($webhook_tetherField == "" | $data->$webhook_tetherField == "")) {
-            echo "<form action=\"./update.php\" method=\"POST\">
+            echo "<td><form action=\"./update.php\" method=\"POST\">
                     <input type=\"hidden\" id=\"id\" name=\"id\" value=\"$newId\">
                     <input id=\"action-$shortNameLower-$newId-button\" type=\"submit\" value=\"" . $webhook_actionDescription . "\" name=\"action\"/>
-                </form><br /><br />";
+                </form></td>";
         }
-        echo "</div>";
+        echo "</div><td width=\"30%\"></td></tr></table>";
         break;
     }
 }
