@@ -2,18 +2,32 @@ FROM php:8.1.0RC5-apache-bullseye
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
-
+# Download updates for PHP
 RUN apt-get update 
-RUN apt-get install -y curl libcurl4-openssl-dev pkg-config git zip unzip zlib1g-dev libzip-dev libssl-dev
+RUN apt-get install -y curl libcurl4-openssl-dev pkg-config git zip unzip zlib1g-dev libzip-dev libssl-dev ssl-cert
 RUN docker-php-ext-install curl
 
+# Install mongodb extension for PHP
 RUN pecl install mongodb && docker-php-ext-enable mongodb
 
 RUN apt-get clean
 
-EXPOSE 80
+# Setup Apache2 mod_ssl with fake SSL cert
+RUN a2enmod ssl
 
+# Setup Apache2 HTTPS env
+RUN a2ensite default-ssl.conf
+
+# Restart Apache2
+RUN service apache2 reload
+
+# Ports
+EXPOSE 80
+EXPOSE 443
+
+# Set working directory
 WORKDIR /var/www/html/
 
+# Pull in latest source from GitHub
 RUN git clone https://github.com/jscanzoni/mongo_legacy_app.git .
 RUN composer require mongodb/mongodb
