@@ -18,9 +18,6 @@ RUN a2enmod ssl
 # Setup Apache2 HTTPS env
 RUN a2ensite default-ssl.conf
 
-# Restart Apache2
-RUN service apache2 reload
-
 # Ports
 EXPOSE 80
 EXPOSE 443
