@@ -18,7 +18,6 @@ docker run -d \
   --name=legacy_apps \
   -e CONNECTION_STRING=<mongodb connection string> \
   -p 80:80 \
-  --mount 
   --restart always \
 php-mongo-legacy-app:latest 
 ```
