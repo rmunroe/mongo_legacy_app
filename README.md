@@ -18,6 +18,7 @@ docker run -d \
   --name=legacy_apps \
   -e CONNECTION_STRING=<mongodb connection string> \
   -p 80:80 \
+  -p 443:443 \
   -v <local cert pem>:/etc/ssl/certs/ssl-cert-snakeoil.pem \
   -v <local cert key>:/etc/ssl/private/ssl-cert-snakeoil.key \
   --restart always \
