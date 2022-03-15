@@ -20,8 +20,11 @@ include "./includes/connect.php";
   <script>
   $( function() {
     <?php foreach($fields as $field){
-      if ($field->type=="date")
+      if ($field->type=="date"){
         echo "\$( \"#$field->field\" ).datepicker();\n";
+        for($i=0;$i<=20;$i++)
+          echo "\$( \"#lineitem-$field->field$i\" ).datepicker();\n";
+      }
     }
     ?>
     

@@ -112,9 +112,33 @@ foreach ($groups as $group) {
             foreach ($fields as $field) {
                 if (isset($field->group) and $field->group == $group) {
 
+                    //echo "<td id=\"lineitem-$key-field-" . $field->field . "\">";
+                    //echo "<input type=\"text\" id=\"lineitem-" . $field->field . "" . $key . "\" name=\"lineitem-" . $field->field . $key . "\" value=\"" . $line[$field->field] . "\" >";
+                    //echo "</td>";
+
                     echo "<td id=\"lineitem-$key-field-" . $field->field . "\">";
-                    echo "<input type=\"text\" id=\"lineitem-" . $field->field . "" . $key . "\" name=\"lineitem-" . $field->field . $key . "\" value=\"" . $line[$field->field] . "\" >";
-                    echo "</td>";
+
+                    switch($field->type){
+                        case "text":
+                            echo "<input type=\"text\" id=\"lineitem-" . $field->field . "". $key . "\" name=\"lineitem-" . $field->field. $key . "\" value=\"" . $line[$field->field] . "\" >";
+                            break;
+                        case "select":
+                            //array_unshift((array)$field->options,"");
+                            echo "<select type=\"text\" id=\"lineitem-" . $field->field . "". $key . "\" name=\"lineitem-" . $field->field . "". $key . "\" >";
+                            echo "<option value=\"\"> -- Select a value -- </option>";
+                            foreach($field->options as $option){
+                                echo "<option value=\"" . $option . "\"".($line[$field->field]==$option?" selected":""). ">" . $option . "</option>";
+                            }
+                            echo "</select>";
+                            break;
+                        case "date":
+                            echo "<input type=\"text\" id=\"lineitem-" . $field->field . "". $key . "\" name=\"lineitem-" . $field->field. $key . "\" value=\"" . $line[$field->field] . "\" >";
+                            break;
+                        default:
+                        echo "<input type=\"text\" id=\"lineitem-" . $field->field . "". $key . "\" name=\"lineitem-" . $field->field. $key . "\" value=\"" . $line[$field->field] . "\" >";
+                        break;
+                        }
+                        echo "</td>";
                 }
             }
             echo "</tr>";
