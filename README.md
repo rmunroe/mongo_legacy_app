@@ -7,7 +7,7 @@ Grab the [dockerfile](includes/dockerfile) and load it onto your docker host.
 ```sh
 mkdir php-mongo-legacy-app
 cd php-mongo-legacy-app
-wget https://raw.githubusercontent.com/jscanzoni/mongo_legacy_app/master/includes/dockerfile
+wget https://raw.githubusercontent.com/rmunroe/mongo_legacy_app/master/includes/dockerfile
 docker build -t php-mongo-legacy-app .
 ```
 
