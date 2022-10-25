@@ -1,4 +1,4 @@
-# Stand Along Legacy App Container
+# Stand-Alone Legacy App Container
 
 ## Build Docker File
 
